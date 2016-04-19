@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<html ng-app="shopular" lang="en-utf8">
 <head>
   <meta charset="utf-8">
   <title>Shopular</title>
@@ -7,13 +8,35 @@
   <meta name='description' content='Shopping App'>
   <meta name='author' content='Noelle Knight'>
   <link rel='stylesheet' type='text/css' href='./css/main.css'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src='./js/main.js'></script>
+  <script src='js/main.js'></script>
 
 </head>
-  <body>
 
-  </body>
+<body>
+  <h2 class="text-warning"> Shopular Inventory</h2>
+  <section ng-controller='ShopInvController as inv'>
+
+    <table class="table table-bordered table-hover">
+      <tr class= "text-primary bg-info">
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Color</th>
+      </tr>
+      <tr ng-repeat='item in inv.all' class="text-info">
+        <td class="text-danger">{{ item.name }}</td>
+        <td>
+          {{ (item.price - item.discount) * (inv.tax) | currency }}
+          <img ng-show="item.discount != 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png">
+        </td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.color }}</td>
+      </tr>
+    </table>
+  </section>
+</body>
 </html>
+
+<!-- <img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png" alt="discount icon"> -->
