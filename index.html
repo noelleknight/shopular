@@ -10,13 +10,19 @@
   <link rel='stylesheet' type='text/css' href='./css/main.css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src='js/main.js'></script>
+  <script src='js/controllers/main.js'></script>
+  <script src='js/controllers/login.js'></script>
+  <script src="js/factories/store-items.js"></script>
 
 </head>
 
 <body>
 
   <h2 class="text-success"> Shopular Inventory</h2>
+  <header ng-controller='LoginController as log'class= 'container'>
+        <h3 class="text-primary">Hello, {{log.name}}!</h3>
+        <p id="date"> {{log.now | date:"MMM d - h:mma "}}</p>
+  </header>
   <section ng-controller='ShopInvController as inv'>
     <p class="text-warning">{{inv.error}}</p>
 
@@ -49,7 +55,7 @@
           <th>Quantity</th>
           <th>Color</th>
         </tr>
-        <tr ng-repeat='item in inv.all | orderBy: "-quantity"' class="text-info">
+        <tr ng-repeat='item in inv.items | orderBy: "-quantity"' class="text-info">
           <td class="text-danger">{{ item.name }}</td>
           <td>
             {{ (item.price - item.discount) + ((item.price - item.discount) * inv.tax) | currency }}
@@ -59,8 +65,10 @@
           <td>{{ item.color }}</td>
         </tr>
       </table>
-
     </section>
+
+
+
   </body>
   </html>
 

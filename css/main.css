@@ -8,11 +8,16 @@ section {
 th {
   font-size: 16px; }
 
-input.ng-invalid.ng-touched {
+input.ng-invalid.ng-touched, .ng-submitted input.ng-invalid {
   border: 1px solid red;
   border-style: inset; }
 
 .topInput {
   margin-top: 3%; }
+
+#date {
+  font-size: 1.2em;
+  color: #C0C0C0;
+  font-family: Garamond; }
 
 /*# sourceMappingURL=main.css.map */
