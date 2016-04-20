@@ -15,28 +15,53 @@
 </head>
 
 <body>
-  <h2 class="text-warning"> Shopular Inventory</h2>
+
+  <h2 class="text-success"> Shopular Inventory</h2>
   <section ng-controller='ShopInvController as inv'>
+    <p class="text-warning">{{inv.error}}</p>
 
-    <table class="table table-bordered table-hover">
-      <tr class= "text-primary bg-info">
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Color</th>
-      </tr>
-      <tr ng-repeat='item in inv.all' class="text-info">
-        <td class="text-danger">{{ item.name }}</td>
-        <td>
-          {{ (item.price - item.discount) + ((item.price - item.discount) * inv.tax) | currency }}
-          <img ng-show="item.discount != 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png">
-        </td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.color }}</td>
-      </tr>
-    </table>
-  </section>
-</body>
-</html>
+    <div class="form-group">
+      <form novalidate name="createForm" ng-submit="inv.save(createForm)">
+        <button class="btn btn-danger">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+        <div class="form-group">
+          <input ng-model="inv.newItem.name" type="text" required minlength="1" placeholder="Add an Item" class="form-control topInput" >
+        </div>
+        <div class="form-group">
+          <input ng-model="inv.newItem.price" type="number" required minlength="1" placeholder="Add a price" class="form-control">
+        </div>
+        <div class="form-group">
+          <input ng-model="inv.newItem.quantity" type="number" required minlength="1" placeholder="Add an amount" class="form-control">
+        </div>
+        <div class="form-group">
+          <input ng-model="inv.newItem.color" type="text" required minlength="1" placeholder="Add a color" class="form-control">
+        </div>
+        <div class="form-group">
+          <input ng-model="inv.newItem.discount" type="number" required minlength="1" placeholder="Add a discount" class="form-control">
+        </div>
+      </form>
 
-<!-- <img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png" alt="discount icon"> -->
+      <table class="table table-bordered table-hover">
+        <tr class= "text-primary bg-info">
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Color</th>
+        </tr>
+        <tr ng-repeat='item in inv.all | orderBy: "-quantity"' class="text-info">
+          <td class="text-danger">{{ item.name }}</td>
+          <td>
+            {{ (item.price - item.discount) + ((item.price - item.discount) * inv.tax) | currency }}
+            <img ng-show="item.discount != 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png">
+          </td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.color }}</td>
+        </tr>
+      </table>
+
+    </section>
+  </body>
+  </html>
+
+  <!-- <img src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png" alt="discount icon"> -->

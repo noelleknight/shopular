@@ -6,7 +6,7 @@
   .controller('ShopInvController', ShopInvController);
 
   function ShopInvController() {
-
+    this.error = "";
     this.tax = 0.05;
 
     this.all = [
@@ -24,6 +24,31 @@
       { "id": 683, "name": "pillow", "price": 27, "quantity": 10, "color": "black", "discount": 12 }
     ];
 
+    this.newItem = {
+      name: "",
+      price: "",
+      quantity: "",
+      color: "",
+      discount:""
+    };
+
+    this.save = function saveItem(form) {
+      if (form.$valid) {
+        this.all.push(this.newItem);
+        this.newItem = {
+          name: "",
+          price: "",
+          quantity: "",
+          color: "",
+          discount:""
+        };
+        form.$setPristine();
+        form.$setUntouched();
+        this.error = "";
+      } else {
+        this.error = 'Please enter valid inputs.';
+      }
+    };
   }
 
 })();
