@@ -59,7 +59,7 @@
           <td class="text-danger">{{ item.name }}</td>
           <td>
             {{ (item.price - item.discount) + ((item.price - item.discount) * inv.tax) | currency }}
-            <img ng-show="item.discount != 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png">
+            <img ng-show="item.discount !== 0" src="https://tiy-learn-content.s3.amazonaws.com/98350f05-sale_2.png">
           </td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.color }}</td>
